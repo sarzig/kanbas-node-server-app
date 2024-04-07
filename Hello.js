@@ -1,15 +1,12 @@
-function rootHandler(req, res) {
-    res.send("Welcome to Node Server!");
+
+export default function Hello(app) {
+    // to see this, go to localhost:4001/hello
+    app.get('/hello', (req, res) => {
+        res.send('Life is good!')
+    })
+
+    // to see this, go to localhost:4001
+    app.get('/', (req, res) => {
+        res.send('Welcome to Full Stack Development!')
+    })
 }
-
-function sayHello(req, res) {
-    res.send("Hello World!");
-}
-
-app.get("/", rootHandler); // register handler
-app.get("/hello", sayHello);
-
-// embedding an anonymous function using arrow function syntax
-app.get("/good", (req, res) => {
-    res.send("<h1>Good Morning!</h1>");
-})
