@@ -20,10 +20,10 @@ const module = {
 };
 
 const todos = [
-    { id: 1, title: "Task 1", completed: false },
-    { id: 2, title: "Task 2", completed: true },
-    { id: 3, title: "Task 3", completed: false },
-    { id: 4, title: "Task 4", completed: true },
+    { id: 1, title: "Task 1", completed: false, description: "" },
+    { id: 2, title: "Task 2", completed: true, description: "" },
+    { id: 3, title: "Task 3", completed: false,  description: "" },
+    { id: 4, title: "Task 4", completed: true,  description: "" }
 ];
 
 
@@ -171,27 +171,32 @@ const Lab5 = (app) => {
         res.json(module);
     }); */
 
+    // Simply return all todos
     app.get("/a5/todos", (req, res) => {
         res.json(todos);
     });
 
+    // 3.3.4 Create a new todo - needs to be before :id otherwise
+    // create would be interpreted as a todo
     app.get("/a5/todos/create", (req, res) => {
         const newTodo = {
-          id: new Date().getTime(),
-          title: "New Task",
-          completed: false,
+            id: new Date().getTime(),
+            title: "New Task",
+            completed: false,
         };
         todos.push(newTodo);
         res.json(todos);
-      });
-    
+    });
 
+    // 3.3.2 Get todo by id
     app.get("/a5/todos/:id", (req, res) => {
         const { id } = req.params;
         const todo = todos.find((t) => t.id === parseInt(id));
         res.json(todo);
     });
 
+    // 3.3.3 Get completed todos
+    // THIS ISN'T WORKING XXX
     app.get("/a5/todos", (req, res) => {
         const { completed } = req.query;
         if (completed !== undefined) {
@@ -203,6 +208,44 @@ const Lab5 = (app) => {
         }
         res.json(todos);
     });
+
+    // get todo by id - this also isn't working
+    app.get("/a5/todos", (req, res) => {
+        const { id } = req.query;
+        if (id !== undefined) {
+            const todosWithTargetId = todos.filter(
+                (t) => t.id == id);
+            res.json(todosWithTargetId);
+            return;
+        }
+        res.json(todos);
+    });
+
+    //3.3.5 - Deleting an Item From an Array
+    app.get("/a5/todos/:id/delete", (req, res) => {
+        const { id } = req.params;
+        const todo = todos.find((t) => t.id === parseInt(id));
+        const todoIndex = todos.indexOf(todo);
+        if (todoIndex !== -1) {
+            todos.splice(todoIndex, 1);
+        }
+        res.json(todos);
+    });
+
+    // 3.3.6 - Updating an Item in an Array
+    app.get("/a5/todos/:id/title/:title", (req, res) => {
+        const { id, title } = req.params;
+        const todo = todos.find((t) => t.id === parseInt(id));
+        todo.title = title;
+        res.json(todos);
+    });
+    app.get("/a5/todos/:id/description/:description", (req, res) => {
+        const { id, description } = req.params;
+        const todo = todos.find((t) => t.id === parseInt(id));
+        todo.description = description;
+        res.json(todos);
+    });
+
 
 
 
