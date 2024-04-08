@@ -2,9 +2,34 @@
 // create route to welcome users to assignment 5.
 // Here we are using the new arrow function syntax
 
+// Initializes the assignment object
+const assignment = {
+    id: 1,
+    title: "NodeJS Assignment",
+    description: "Create a NodeJS server with ExpressJS",
+    due: "2021-10-10",
+    completed: true,
+    score: 0,
+};
+
+const module = {
+    id: 1,
+    name: "Baby's First Module",
+    description: "This module will teach you how to make a module (META)",
+    course: "Baby 101"
+};
+
+const todos = [
+    { id: 1, title: "Task 1", completed: false },
+    { id: 2, title: "Task 2", completed: true },
+    { id: 3, title: "Task 3", completed: false },
+    { id: 4, title: "Task 4", completed: true },
+];
+
+
 const Lab5 = (app) => {
 
-    // Serves "Welcome" Link in Lab 5
+    /* // Serves "Welcome" Link in Lab 5
     app.get("/a5/welcome", (req, res) => {
         res.send("Welcome to Assignment 5");
     });
@@ -61,9 +86,22 @@ const Lab5 = (app) => {
         res.send(result.toString());
     });
 
+    // 3.2 Working with Objects
+    app.get("/a5/assignment", (req, res) => {
+        res.json(assignment);
+    });
+
 
     app.get("/a5/assignment/title", (req, res) => {
         res.json(assignment.title);
+    });
+
+    app.get("/a5/assignment/score", (req, res) => {
+        res.json(assignment.score);
+    });
+
+    app.get("/a5/assignment/completed", (req, res) => {
+        res.json(assignment.completed);
     });
 
 
@@ -72,6 +110,102 @@ const Lab5 = (app) => {
         assignment.title = newTitle;
         res.json(assignment);
     });
+
+    app.get("/a5/assignment/score/:newScore", (req, res) => {
+        const { newScore } = req.params;
+        assignment.score = newScore;
+        res.json(assignment);
+    });
+
+    app.get("/a5/assignment/completed/:newCompleted", (req, res) => {
+        const { newCompleted } = req.params;
+        assignment.completed = newCompleted;
+        res.json(assignment);
+    });
+
+    // 3.2.4 on your own (modules)
+    app.get("/a5/module", (req, res) => {
+        res.json(module);
+    });
+
+
+    app.get("/a5/module/name", (req, res) => {
+        res.json(module.name);
+    });
+
+    app.get("/a5/module/description", (req, res) => {
+        res.json(module.description);
+    });
+
+    app.get("/a5/module/id", (req, res) => {
+        res.json(module.id);
+    });
+
+    app.get("/a5/module/course", (req, res) => {
+        res.json(module.course);
+    });
+
+
+    // If you navigate to this link, it updates the module's name
+    app.get("/a5/module/name/:newName", (req, res) => {
+        const { newName } = req.params;
+        module.name = newName;
+        res.json(module);
+    });
+
+    app.get("/a5/module/description/:newDescription", (req, res) => {
+        const { newDescription } = req.params;
+        module.description = newDescription;
+        res.json(module);
+    });
+
+    app.get("/a5/module/id/:newId", (req, res) => {
+        const { newId } = req.params;
+        module.id = newId;
+        res.json(module);
+    });
+
+    app.get("/a5/module/course/:newCourse", (req, res) => {
+        const { newCourse } = req.params;
+        module.course = newCourse;
+        res.json(module);
+    }); */
+
+    app.get("/a5/todos", (req, res) => {
+        res.json(todos);
+    });
+
+    app.get("/a5/todos/create", (req, res) => {
+        const newTodo = {
+          id: new Date().getTime(),
+          title: "New Task",
+          completed: false,
+        };
+        todos.push(newTodo);
+        res.json(todos);
+      });
+    
+
+    app.get("/a5/todos/:id", (req, res) => {
+        const { id } = req.params;
+        const todo = todos.find((t) => t.id === parseInt(id));
+        res.json(todo);
+    });
+
+    app.get("/a5/todos", (req, res) => {
+        const { completed } = req.query;
+        if (completed !== undefined) {
+            const completedBool = completed === "true";
+            const completedTodos = todos.filter(
+                (t) => t.completed === completedBool);
+            res.json(completedTodos);
+            return;
+        }
+        res.json(todos);
+    });
+
+
+
 
 };
 export default Lab5;
