@@ -29,7 +29,7 @@ const todos = [
 
 const Lab5 = (app) => {
 
-    /* // Serves "Welcome" Link in Lab 5
+    // Serves "Welcome" Link in Lab 5
     app.get("/a5/welcome", (req, res) => {
         res.send("Welcome to Assignment 5");
     });
@@ -169,7 +169,7 @@ const Lab5 = (app) => {
         const { newCourse } = req.params;
         module.course = newCourse;
         res.json(module);
-    }); */
+    });
 
     // Simply return all todos
     app.get("/a5/todos", (req, res) => {
@@ -245,10 +245,5 @@ const Lab5 = (app) => {
         todo.description = description;
         res.json(todos);
     });
-
-
-
-
-
 };
 export default Lab5;
