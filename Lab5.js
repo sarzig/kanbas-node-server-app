@@ -178,15 +178,15 @@ const Lab5 = (app) => {
 
     // 3.3.4 Create a new todo - needs to be before :id otherwise
     // create would be interpreted as a todo
-    app.get("/a5/todos/create", (req, res) => {
+    app.post("/a5/todos", (req, res) => {
         const newTodo = {
-            id: new Date().getTime(),
-            title: "New Task",
-            completed: false,
+          ...req.body,
+          id: new Date().getTime(),
         };
         todos.push(newTodo);
-        res.json(todos);
-    });
+        res.json(newTodo);
+      });
+    
 
     // 3.3.2 Get todo by id
     app.get("/a5/todos/:id", (req, res) => {
@@ -222,15 +222,13 @@ const Lab5 = (app) => {
     });
 
     //3.3.5 - Deleting an Item From an Array
-    app.get("/a5/todos/:id/delete", (req, res) => {
+    app.delete("/a5/todos/:id", (req, res) => {
         const { id } = req.params;
         const todo = todos.find((t) => t.id === parseInt(id));
-        const todoIndex = todos.indexOf(todo);
-        if (todoIndex !== -1) {
-            todos.splice(todoIndex, 1);
-        }
-        res.json(todos);
-    });
+        todos.splice(todos.indexOf(todo), 1);
+        res.sendStatus(200);
+      });
+    
 
     // 3.3.6 - Updating an Item in an Array
     app.get("/a5/todos/:id/title/:title", (req, res) => {
@@ -245,5 +243,17 @@ const Lab5 = (app) => {
         todo.description = description;
         res.json(todos);
     });
+
+    // 3.5.3 - Updating via app.put 
+    app.put("/a5/todos/:id", (req, res) => {
+        const { id } = req.params;
+        const todo = todos.find((t) => t.id === parseInt(id));
+        todo.title = req.body.title;
+        todo.description = req.body.description;
+        todo.due = req.body.due;
+        todo.completed = req.body.completed;
+        res.sendStatus(200);
+      });
+    
 };
 export default Lab5;
