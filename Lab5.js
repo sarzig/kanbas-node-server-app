@@ -2,7 +2,7 @@
 // create route to welcome users to assignment 5.
 // Here we are using the new arrow function syntax
 
-// Initializes the assignment object
+// Initializes the assignment object 
 const assignment = {
     id: 1,
     title: "NodeJS Assignment",
@@ -22,8 +22,8 @@ const module = {
 const todos = [
     { id: 1, title: "Task 1", completed: false, description: "" },
     { id: 2, title: "Task 2", completed: true, description: "" },
-    { id: 3, title: "Task 3", completed: false,  description: "" },
-    { id: 4, title: "Task 4", completed: true,  description: "" }
+    { id: 3, title: "Task 3", completed: false, description: "" },
+    { id: 4, title: "Task 4", completed: true, description: "" }
 ];
 
 
@@ -180,13 +180,13 @@ const Lab5 = (app) => {
     // create would be interpreted as a todo
     app.post("/a5/todos", (req, res) => {
         const newTodo = {
-          ...req.body,
-          id: new Date().getTime(),
+            ...req.body,
+            id: new Date().getTime(),
         };
         todos.push(newTodo);
         res.json(newTodo);
-      });
-    
+    });
+
 
     // 3.3.2 Get todo by id
     app.get("/a5/todos/:id", (req, res) => {
@@ -225,10 +225,16 @@ const Lab5 = (app) => {
     app.delete("/a5/todos/:id", (req, res) => {
         const { id } = req.params;
         const todo = todos.find((t) => t.id === parseInt(id));
+        if (!todo) {
+            res.status(404)
+                .json({ message: `Unable to delete Todo with ID ${id}` });
+            return;
+        }
+
         todos.splice(todos.indexOf(todo), 1);
         res.sendStatus(200);
-      });
-    
+    });
+
 
     // 3.3.6 - Updating an Item in an Array
     app.get("/a5/todos/:id/title/:title", (req, res) => {
@@ -253,7 +259,7 @@ const Lab5 = (app) => {
         todo.due = req.body.due;
         todo.completed = req.body.completed;
         res.sendStatus(200);
-      });
-    
+    });
+
 };
 export default Lab5;
