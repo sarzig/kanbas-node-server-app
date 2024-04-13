@@ -1,7 +1,7 @@
 import express from 'express'
 import Hello from "./Hello.js";
 import Lab5 from "./Lab5.js";
-import CourseRoutes from "./Kanbas/courses/routes.js";
+import CourseRoutes from "./Kanbas/courses/routes.js"; // Import the CourseRoutes function from the routes.js file
 import cors from "cors";
 
 const app = express();
