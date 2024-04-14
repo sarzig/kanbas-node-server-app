@@ -2,6 +2,7 @@ import express from 'express'
 import Hello from "./Hello.js";
 import Lab5 from "./Lab5.js";
 import CourseRoutes from "./Kanbas/courses/routes.js"; // Import the CourseRoutes function from the routes.js file
+import ModuleRoutes from "./Kanbas/modules/routes.js";
 import cors from "cors";
 
 const app = express();
@@ -9,6 +10,7 @@ app.use(express.json());
 
 app.use(cors());
 CourseRoutes(app);
+ModuleRoutes(app);
 Lab5(app);
 Hello(app);
 

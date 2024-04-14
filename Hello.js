@@ -7,6 +7,6 @@ export default function Hello(app) {
 
     // to see this, go to localhost:4001
     app.get('/', (req, res) => {
-        res.send('xWelcome to Full Stack Development!')
+        res.send('Welcome to Full Stack Development!')
     })
 }
