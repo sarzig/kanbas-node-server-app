@@ -31,7 +31,7 @@ const Lab5 = (app) => {
 
     // Serves "Welcome" Link in Lab 5
     app.get("/a5/welcome", (req, res) => {
-        res.send("Welcome to Assignment 5");
+        res.send("xWelcome to Assignment 5");
     });
 
     // Serves Encoding Parameters in URLs
