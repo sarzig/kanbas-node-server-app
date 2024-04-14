@@ -1,5 +1,8 @@
 import Database from "../Database/index.js";
+
 export default function CourseRoutes(app) {
+
+  // Get a course by ID
     app.get("/api/courses/:id", (req, res) => {
         const { id } = req.params;
         const course = Database.courses
@@ -37,14 +40,6 @@ export default function CourseRoutes(app) {
             ...req.body,
             _id: new Date().getTime().toString()
         };
-
-        //troubleshoot
-        console.log("course:");
-        console.log(course);
-
-        console.log("req.body:");
-        console.log(req.body);
-
         Database.courses.push(course);
         res.send(course);
 
