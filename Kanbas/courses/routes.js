@@ -37,8 +37,17 @@ export default function CourseRoutes(app) {
             ...req.body,
             _id: new Date().getTime().toString()
         };
+
+        //troubleshoot
+        console.log("course:");
+        console.log(course);
+
+        console.log("req.body:");
+        console.log(req.body);
+
         Database.courses.push(course);
         res.send(course);
+
 
     });
 

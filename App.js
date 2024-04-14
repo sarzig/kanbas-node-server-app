@@ -5,7 +5,7 @@ import CourseRoutes from "./Kanbas/courses/routes.js"; // Import the CourseRoute
 import cors from "cors";
 
 const app = express();
-//app.use(express.json());
+app.use(express.json());
 
 app.use(cors());
 CourseRoutes(app);
