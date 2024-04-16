@@ -1,7 +1,7 @@
 export default [
   {
       "_id": "C1",
-      "name": "test Advanced Confections",
+      "name": "Advanced Confections",
       "number": "CS1234",
       "startDate": "2023-01-10",
       "endDate": "2023-05-15",
