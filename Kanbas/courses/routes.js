@@ -4,6 +4,8 @@ export default function CourseRoutes(app) {
 
   // Get a course by ID
     app.get("/api/courses/:id", (req, res) => {
+      console.log("CourseRoutes/routes.js: app get request");
+
         const { id } = req.params;
         const course = Database.courses
           .find((c) => c._id === id);
@@ -17,6 +19,8 @@ export default function CourseRoutes(app) {
       
     // Update a course
     app.put("/api/courses/:id", (req, res) => {
+      console.log("CourseRoutes/routes.js: app put request");
+
         const { id } = req.params;
         const course = req.body;
         Database.courses = Database.courses.map((c) =>
@@ -28,6 +32,8 @@ export default function CourseRoutes(app) {
 
     // Delete a course
     app.delete("/api/courses/:id", (req, res) => {
+      console.log("CourseRoutes/routes.js: app delete request");
+
         const { id } = req.params;
         Database.courses = Database.courses
             .filter((c) => c._id !== id);
@@ -36,6 +42,8 @@ export default function CourseRoutes(app) {
 
     // Add a course
     app.post("/api/courses", (req, res) => {
+      console.log("CourseRoutes/routes.js: app post request");
+
         const course = {
             ...req.body,
             _id: new Date().getTime().toString()
@@ -48,6 +56,8 @@ export default function CourseRoutes(app) {
 
     // Get all courses
     app.get("/api/courses", (req, res) => {
+      console.log("CourseRoutes/routes.js: app get request");
+
         const courses = Database.courses;
         res.send(courses);
     });
