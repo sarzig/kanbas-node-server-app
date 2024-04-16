@@ -4,7 +4,7 @@ export default function ModuleRoutes(app) {
 
     // Update module
     app.put("/api/modules/:mid", (req, res) => {
-        console.log("app put request");
+        console.log("ModuleRoutes app put request");
         const { mid } = req.params;
         const moduleIndex = Database.modules.findIndex(
             (m) => m._id === mid);
@@ -17,7 +17,7 @@ export default function ModuleRoutes(app) {
 
     // Delete module
     app.delete("/api/modules/:mid", (req, res) => {
-        console.log("ModulesRoutes/routes.js: app delete request");
+        console.log("ModulesRoutes app delete request");
 
         const { mid } = req.params;
         Database.modules = Database.modules.filter((m) => m._id !== mid);
@@ -26,7 +26,7 @@ export default function ModuleRoutes(app) {
 
     // Add module
     app.post("/api/courses/:cid/modules", (req, res) => {
-        console.log("app post request");
+        console.log("ModulesRoutes app post request");
 
         const { cid } = req.params;
         const newModule = {
@@ -40,7 +40,7 @@ export default function ModuleRoutes(app) {
 
     // Get all modules
     app.get("/api/courses/:cid/modules", (req, res) => {
-        console.log("app get request");
+        console.log("ModulesRoutes app get request");
 
         const { cid } = req.params;
         const modules = Database.modules
