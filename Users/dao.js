@@ -12,3 +12,8 @@ export const findUserByCredentials = (username, password) => model.findOne({ use
 export const updateUser = (userId, user) => model.updateOne({ _id: userId }, { $set: user });
 export const deleteUser = (userId) => model.deleteOne({ _id: userId });
 export const findUsersByRole = (role) => model.find({ role: role });
+
+export const deleteBook = async (bookId) => {
+    const status = await model.deleteOne(bookId);
+    return status;
+  }
